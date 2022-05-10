@@ -1,0 +1,214 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Exact Methods for Chain-Structured Models | Zechang Sun's Page</title><meta name="keywords" content="Monte Carlo Strategies in Scientific Computing"><meta name="author" content="Zechang Sun"><meta name="copyright" content="Zechang Sun"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="IntroductionHere we discuss an important probability distribution used in many applications which has the following form:  \pi(\mathbf{x})\propto \exp\{-\sum_{i&#x3D;1}^d h_i (x_{i-1}, x_i)\},where $\mathb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Exact Methods for Chain-Structured Models">
+<meta property="og:url" content="https://zechangsun.github.io/2022/05/10/monte-carlo-2-4/index.html">
+<meta property="og:site_name" content="Zechang Sun&#39;s Page">
+<meta property="og:description" content="IntroductionHere we discuss an important probability distribution used in many applications which has the following form:  \pi(\mathbf{x})\propto \exp\{-\sum_{i&#x3D;1}^d h_i (x_{i-1}, x_i)\},where $\mathb">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZechangSun/image-hosting/main/image/monte-carlo.webp">
+<meta property="article:published_time" content="2022-05-10T13:10:01.000Z">
+<meta property="article:modified_time" content="2022-05-10T15:22:08.481Z">
+<meta property="article:author" content="Zechang Sun">
+<meta property="article:tag" content="Monte Carlo Strategies in Scientific Computing">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ZechangSun/image-hosting/main/image/monte-carlo.webp"><link rel="shortcut icon" href="/img/logo.png"><link rel="canonical" href="https://zechangsun.github.io/2022/05/10/monte-carlo-2-4/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Exact Methods for Chain-Structured Models',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-10 23:22:08'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/logo.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">6</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/myself/"><i class="fa-fw fa fa-id-card"></i><span> Myself</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://raw.githubusercontent.com/ZechangSun/image-hosting/main/image/monte-carlo.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Zechang Sun's Page</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/myself/"><i class="fa-fw fa fa-id-card"></i><span> Myself</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Exact Methods for Chain-Structured Models</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-05-10T13:10:01.000Z" title="Created 2022-05-10 21:10:01">2022-05-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-05-10T15:22:08.481Z" title="Updated 2022-05-10 23:22:08">2022-05-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Reading-Notes/">Reading Notes</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>6min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Exact Methods for Chain-Structured Models"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Here we discuss an important probability distribution used in many applications which has the following form:</p>
+<script type="math/tex; mode=display">
+\pi(\mathbf{x})\propto \exp\{-\sum_{i=1}^d h_i (x_{i-1}, x_i)\},</script><p>where $\mathbf{x}=(x_0, x_1,\dots,x_d)$.Clearly, this type of model has a “Markovian structure” as the conditional distribution of $x_i$ depends only on its two neighboring variables $x_{i-1}$ and $x_{i+1}$. When, $x_0,…,x_d$ are discrete random variables taking values in a finite set $\mathcal{S}=\{s_1, …,s_k\}$, this structure is often referred to as the <em>hidden Markov model</em> (HMM).<br>We introduce two methods to deal with a hidden Markov model:</p>
+<ul>
+<li>Dynamic programming, to find the global maximum of $\pi(\mathbf{x})$ and its maximizer $\hat{\mathbf{x}}$;</li>
+<li>Propagation method, to find the marginal distribution of each $x_i$ and drawing samples from $\pi(x)$.<h2 id="Mehtods"><a href="#Mehtods" class="headerlink" title="Mehtods"></a>Mehtods</h2><h3 id="Dynamic-Programming-Bellman-1957"><a href="#Dynamic-Programming-Bellman-1957" class="headerlink" title="Dynamic Programming [Bellman 1957]"></a>Dynamic Programming [<em>Bellman 1957</em>]</h3>Dynamic programming is a recursive algorithm used for finding both the global maximum and its maximizer for $\pi(\mathbf{x})$. It makes use of the chain structure and solve this problem by updating the minimum function for each $x_i$ iteratively. Briefly summarize here. Note that all notations are the same as they in Section <strong>Introduction</strong>.<br>Suppose we want to maximize $\pi(\mathbf{x})$, it is equivalent to minimizing its exponent $H(\mathbf{x})=\sum_{i=1}^{d}h_i(x_{i-1}, x_i)$.<br>The dynamic programming method works as following:</li>
+<li>Define $m_1(x) = \min_{s_i\in \mathcal{S}} h_1(s_i, x)$, for $x\in \mathcal{S}$.</li>
+<li>Recursively compute $m_t(x)=\min_{s_i\in\mathcal{S}}\{m_{t-1}(s_i)+h_t(s_i,x)\}$, for $x\in \mathcal{S}$.</li>
+<li>Find the optimal value $H(x)$ by computing $\min_{s_i\in\mathcal{S}} m_d(s)$.<br>Through simple induction, one can check that:<script type="math/tex; mode=display">
+\min_{x\in\mathcal{S}}m_t(x) = \min_{x_i\in\mathcal{S}}\sum_{i=1}^d h_i(x_{i-1}, x_i).</script>To find out which $\mathbf{x}$ gives rise to the global minimum of $H(\mathbf{x})$, we can trace backward as follows:<br>1.Let $\hat{x}_d$ be the minimizer of $m_d(x)$, which is $\hat{x}_d =\mathrm{arg}\min_{s_i\in\mathcal{S}}m_d(s_i)$;<br>2.For $t=d-1,d-2,…,1$, we let<script type="math/tex; mode=display">
+\hat{x}_t = \mathrm{arg}\min_{s_i\in\mathcal{S}} \min\{m_t(s_i)+h_{t+1}(s_i, \hat{x}_{t+1})\}</script>Then the configuration $\hat{\mathbf{x}}=(\hat{x}_1,…,\hat{x}_d)$ is the minimizer of $H(\mathbf{x})$.<h3 id="Propagation-Method"><a href="#Propagation-Method" class="headerlink" title="Propagation Method"></a>Propagation Method</h3>To simulate from $\pi(\mathbf{x})$, we need to draw $x_d$ from its marginal distribution firstly, which requires us to marginalize $x_1,…,x_{d-1}$ in the joint distribution $\pi(\mathbf{x})$. After we have drawn $x_d$, we can work our way backward recursively to sample $x_{d-1},…,x_0$. The marginalization step is based on the observation that the overall summation can be decomposed into recursive steps, which is<script type="math/tex; mode=display">
+Z =\sum_x\exp(-H(x))=\sum_{x_d}[\cdots[\sum_{x_1}\{\sum_{x_0}\exp(-h_1(x_0,x_1))\}\exp(-h_2(x_1, x_2))]\cdots].</script>The detailed procedures for computing the partition function is:</li>
+<li>Define $V_1(x)=\sum_{x_0\in\mathcal{S}}\exp(-h_1(x_0,x))$;</li>
+<li>Compute recursively for $t=2,\dots,d$, $V_t(x)=\sum_{y\in\mathcal{S}}V_{t-1}(y)\exp(-h_t(y,x))$;</li>
+<li>Compute the partition function $Z=\sum_{x\in\mathcal{S}}V_d(x)$.<br>With the partition function $Z$, we can sample from $\pi(x)$ as following:</li>
+<li>Draw $x_d$ from $\mathcal{S}$ with probability $V_d(x_d)/Z$;</li>
+<li>For $t=d-1,\dots,1$, draw $x_t$ from<script type="math/tex; mode=display">
+p_t(x)= \frac{V_t(x)\exp(-h_{t+1}(x,x_{t+1}))}{\sum_{y\in S}V_t(y)\exp(-h_{t+1}(y,x_{t+1}))}</script>Then  random sample $\mathbf{x}=(x_1,\dots,x_d)$ obtained in this way follows the distribution $\pi(\mathbf{x})$.<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2>We use aboves methods for solving a one-dimensional Ising model:<script type="math/tex; mode=display">
+\pi(\mathbf{x}) = Z^{-1}\exp\{\beta(x_0 x_1 +\cdots + x_{d-1}x_d)\},</script>where $x_i$ takes values in $\mathcal{S}={-1, 1}$.<br>Oberviously, when $\beta&gt;0$, $\mathrm{arg}\max\{\pi(\mathbf{x})\}=(-1, -1,\dots,-1)$ or $(1,1,\dots,1)$, and when $\beta&lt;0$, $\mathrm{arg}\max\{\pi(\mathbf{x})\}=(-1, 1,-1,\dots)$ or $(1, -1, 1,\dots)$.<br>We first display the <code>Python</code> code for above methods as:<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">ISingModel</span>(<span class="params">beta=<span class="number">0.1</span></span>):</span><br><span class="line">    S = np.array([-<span class="number">1</span>, <span class="number">1</span>])</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">h</span>(<span class="params">l, r</span>):</span><br><span class="line">        <span class="keyword">return</span> -beta*l*r</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">compute</span>(<span class="params">x</span>):</span><br><span class="line">        ans = <span class="number">0.</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(x)):</span><br><span class="line">            ans += h(x[i-<span class="number">1</span>], x[i])</span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">dynamic_programming</span>(<span class="params">k=<span class="number">10</span></span>):</span><br><span class="line">        m = []</span><br><span class="line">        x = []</span><br><span class="line">        <span class="comment"># forward</span></span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> S:</span><br><span class="line">            x += [np.<span class="built_in">min</span>(h(S, s))] </span><br><span class="line">        m += [np.array(x)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, k-<span class="number">1</span>):</span><br><span class="line">            x = []</span><br><span class="line">            <span class="keyword">for</span> s <span class="keyword">in</span> S:</span><br><span class="line">                x += [np.<span class="built_in">min</span>(m[i-<span class="number">1</span>]+h(s, S))]</span><br><span class="line">            m += [np.array(x)]</span><br><span class="line">        <span class="comment"># backward</span></span><br><span class="line">        xs = np.zeros(k)</span><br><span class="line">        xs[-<span class="number">1</span>] = S[np.argmin(m[-<span class="number">1</span>])]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k-<span class="number">2</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">            xs[i] = S[np.argmin(m[i]+h(S, xs[i+<span class="number">1</span>]))]</span><br><span class="line">        <span class="keyword">return</span> m, xs</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">simulation</span>(<span class="params">k=<span class="number">10</span></span>):</span><br><span class="line">        V = []</span><br><span class="line">        v1 = []</span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> S:</span><br><span class="line">            v1 += [np.<span class="built_in">sum</span>(np.exp(-<span class="number">1.</span>*h(s, S)))]</span><br><span class="line">        V += [v1]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, k):</span><br><span class="line">            v = []</span><br><span class="line">            <span class="keyword">for</span> s <span class="keyword">in</span> S:</span><br><span class="line">                v += [np.<span class="built_in">sum</span>(V[i-<span class="number">1</span>]*np.exp(-<span class="number">1.</span>*h(S, s)))]</span><br><span class="line">            V += [v]</span><br><span class="line">        x = np.zeros(k)</span><br><span class="line">        Z = np.<span class="built_in">sum</span>(V[-<span class="number">1</span>])</span><br><span class="line">        x[k-<span class="number">1</span>] = S[np.random.binomial(<span class="number">1</span>, V[k-<span class="number">1</span>][<span class="number">0</span>]/Z, <span class="number">1</span>)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k-<span class="number">2</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">            z = np.<span class="built_in">sum</span>(V[i]*np.exp(-<span class="number">1.</span>*h(S, x[i+<span class="number">1</span>])))</span><br><span class="line">            p1 = V[i][<span class="number">1</span>]*np.exp(-<span class="number">1.</span>*h(<span class="number">1.</span>, x[i+<span class="number">1</span>]))/z</span><br><span class="line">            x[i] = S[np.random.binomial(<span class="number">1</span>, p1, <span class="number">1</span>)]</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">    <span class="keyword">return</span> dynamic_programming, simulation</span><br></pre></td></tr></table></figure>
+It is easy to verify that the dynamic programming function works well.<br>For simulating, we define the number of flips as a statistic $T$. Obviously, larger $\beta&gt;0$ will lead to smaller $T$, while smaller $\beta&lt;0$ will lead to larger $T$.<br>We fix the number of particles to be $10$, and here is our result:<br><img src="https://raw.githubusercontent.com/ZechangSun/image-hosting/main/image/number-of-flip.1ext5lvghyo0.webp" alt="number-of-clips"><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2></li>
+<li><em>Monte Carlo Strategies in Scientific Computing</em>, Jun S. Liu, 2001</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Zechang Sun</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://zechangsun.github.io/2022/05/10/monte-carlo-2-4/">https://zechangsun.github.io/2022/05/10/monte-carlo-2-4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Monte-Carlo-Strategies-in-Scientific-Computing/">Monte Carlo Strategies in Scientific Computing</a></div><div class="post_share"><div class="social-share" data-image="https://raw.githubusercontent.com/ZechangSun/image-hosting/main/image/monte-carlo.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/05/05/variance-reduction-methods/"><img class="next-cover" src="https://raw.githubusercontent.com/ZechangSun/image-hosting/main/image/monte-carlo.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">Variance Reduction Methods</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2022/04/09/RejectionSampling/" title="The Rejection Method"><img class="cover" src="https://raw.githubusercontent.com/ZechangSun/image-hosting/main/image/monte-carlo.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-09</div><div class="title">The Rejection Method</div></div></a></div><div><a href="/2022/04/05/How-to-generate-simple-random-variables/" title="How to generate simple random variables ?"><img class="cover" src="https://raw.githubusercontent.com/ZechangSun/image-hosting/main/image/monte-carlo.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-05</div><div class="title">How to generate simple random variables ?</div></div></a></div><div><a href="/2022/05/05/variance-reduction-methods/" title="Variance Reduction Methods"><img class="cover" src="https://raw.githubusercontent.com/ZechangSun/image-hosting/main/image/monte-carlo.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-05</div><div class="title">Variance Reduction Methods</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zechang Sun</div><div class="author-info__description">a Phd student of astronomy</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">6</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/zechangsun" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:sunzc18@mails.tsinghua.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mehtods"><span class="toc-number">2.</span> <span class="toc-text">Mehtods</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dynamic-Programming-Bellman-1957"><span class="toc-number">2.1.</span> <span class="toc-text">Dynamic Programming [Bellman 1957]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Propagation-Method"><span class="toc-number">2.2.</span> <span class="toc-text">Propagation Method</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Experiments"><span class="toc-number">3.</span> <span class="toc-text">Experiments</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">4.</span> <span class="toc-text">Reference</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/05/10/monte-carlo-2-4/" title="Exact Methods for Chain-Structured Models"><img src="https://raw.githubusercontent.com/ZechangSun/image-hosting/main/image/monte-carlo.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Exact Methods for Chain-Structured Models"/></a><div class="content"><a class="title" href="/2022/05/10/monte-carlo-2-4/" title="Exact Methods for Chain-Structured Models">Exact Methods for Chain-Structured Models</a><time datetime="2022-05-10T13:10:01.000Z" title="Created 2022-05-10 21:10:01">2022-05-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/05/variance-reduction-methods/" title="Variance Reduction Methods"><img src="https://raw.githubusercontent.com/ZechangSun/image-hosting/main/image/monte-carlo.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Variance Reduction Methods"/></a><div class="content"><a class="title" href="/2022/05/05/variance-reduction-methods/" title="Variance Reduction Methods">Variance Reduction Methods</a><time datetime="2022-05-05T13:58:03.000Z" title="Created 2022-05-05 21:58:03">2022-05-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/13/GSoC-paper-reading-1/" title="Systematic evaluation of variability detection methods for eROSITA"><img src="/img/index.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Systematic evaluation of variability detection methods for eROSITA"/></a><div class="content"><a class="title" href="/2022/04/13/GSoC-paper-reading-1/" title="Systematic evaluation of variability detection methods for eROSITA">Systematic evaluation of variability detection methods for eROSITA</a><time datetime="2022-04-13T08:58:05.000Z" title="Created 2022-04-13 16:58:05">2022-04-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/09/RejectionSampling/" title="The Rejection Method"><img src="https://raw.githubusercontent.com/ZechangSun/image-hosting/main/image/monte-carlo.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="The Rejection Method"/></a><div class="content"><a class="title" href="/2022/04/09/RejectionSampling/" title="The Rejection Method">The Rejection Method</a><time datetime="2022-04-09T11:54:06.000Z" title="Created 2022-04-09 19:54:06">2022-04-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/05/How-to-generate-simple-random-variables/" title="How to generate simple random variables ?"><img src="https://raw.githubusercontent.com/ZechangSun/image-hosting/main/image/monte-carlo.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="How to generate simple random variables ?"/></a><div class="content"><a class="title" href="/2022/04/05/How-to-generate-simple-random-variables/" title="How to generate simple random variables ?">How to generate simple random variables ?</a><time datetime="2022-04-05T13:35:09.000Z" title="Created 2022-04-05 21:35:09">2022-04-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Zechang Sun</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Local search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
